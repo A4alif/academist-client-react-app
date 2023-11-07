@@ -36,7 +36,7 @@ const Navbar = () => {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "text-blue-600 underline"
+                        ? "text-green-600 font-semibold "
                         : ""
                     }
                   >
@@ -45,30 +45,30 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/booking"
+                    to="/create-assignment"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? "pending"
                         : isActive
-                        ? "text-blue-600 underline"
+                        ? "text-green-600 font-semibold  "
                         : ""
                     }
                   >
-                    Booking
+                    Create Assignment
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="/about"
+                    to="/assignments"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? "pending"
                         : isActive
-                        ? "text-blue-600 underline"
+                        ? "text-green-600 font-semibold  "
                         : ""
                     }
                   >
-                    About
+                    All Assignments
                   </NavLink>
                 </li>
               </ul>
@@ -77,7 +77,6 @@ const Navbar = () => {
               <div className="w-40">
                 <img className=" md:block" src={logo} alt="" />
               </div>
-              {/* <h2 className="text-2xl font-bold md:text-3xl">EventTech</h2> */}
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">
@@ -88,7 +87,7 @@ const Navbar = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? "text-green-600 underline"
+                    ? "text-green-600 font-semibold "
                     : ""
                 }
               >
@@ -100,7 +99,7 @@ const Navbar = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? "text-green-600 underline"
+                    ? "text-green-600 font-semibold  "
                     : ""
                 }
               >
@@ -112,7 +111,7 @@ const Navbar = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? "text-green-600 underline"
+                    ? "text-green-600 font-semibold  "
                     : ""
                 }
               >
