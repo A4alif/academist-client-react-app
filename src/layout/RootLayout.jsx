@@ -1,10 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Navbar from '../components/Navbar/Navbar'
 
-const Root = () => {
+const RootLayout = () => {
   return (
     <div>
-        <header></header>
+        <header className='bg-base-300'>
+          <Navbar />
+        </header>
         <main>
             <Outlet />
         </main>
@@ -13,4 +16,4 @@ const Root = () => {
   )
 }
 
-export default Root
+export default RootLayout
