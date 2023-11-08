@@ -20,33 +20,23 @@ const Register = () => {
     const { name, photourl, email, password } = data;
     createUser(email, password)
       .then((result) => {
+        toast.success('Successfully Registered', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: photourl,
         })
           .then(() => {
             // Profile updated!
-            // ...
-            logOut()
-              .then(() => {
-                toast.success(
-                  "Successfully Registered, Pleae login to continue",
-                  {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                  }
-                );
-                navigate("/login");
-              })
-              .catch((error) => {
-                toast(error.message);
-              });
+            // ..
           })
           .catch((error) => {
             toast.error("Something Went Wrong", {
@@ -60,6 +50,7 @@ const Register = () => {
               theme: "light",
             });
           });
+          navigate('/')
       })
       .catch((error) => {
         toast(error.message);
