@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
+
+  const axios = useAxios();
 
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
@@ -22,8 +26,30 @@ const CreateAssignment = () => {
       difficultyLevel,
       email: user?.email,
     };
-    console.log(assignmentInfo);
+
+    axios.post("/create-assignment", assignmentInfo)
+    .then((res) => {
+      if(res.data.insertedId){
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Assignment Created Successfully",
+          
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops",
+          text: "Something Went Wrong",
+          
+        });
+      }
+      form.reset();
+    })
+
   };
+
+    
 
   return (
     <>
