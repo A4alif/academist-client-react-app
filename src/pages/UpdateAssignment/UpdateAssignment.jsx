@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
-const CreateAssignment = () => {
-  const { user } = useContext(AuthContext);
+import React, { useContext } from 'react'
+import { AuthContext } from '../../Provider/AuthProvider';
+const UpdateAssignment = () => {
+  const {user} = useContext(AuthContext);
 
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
@@ -13,6 +13,7 @@ const CreateAssignment = () => {
     const dueDate = form.dueDate.value;
     const difficultyLevel = form.assignmentType.value;
 
+    
     const assignmentInfo = {
       title,
       thumbnail,
@@ -20,19 +21,19 @@ const CreateAssignment = () => {
       description,
       dueDate,
       difficultyLevel,
-      email: user?.email,
-    };
+      email: user?.email
+    }
     console.log(assignmentInfo);
-  };
 
+  }
   return (
     <>
-      <div className="container mx-auto px-6 py-24">
+        <div className="container mx-auto px-6 py-24">
         <div className="flex flex-col lg:flex-row  items-center lg:items-start space-y-8 lg:space-y-0">
           <div className=" w-full lg:flex-1  ">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">
-                Create an Assignment
+                Update an Assignment
               </h2>
               <div className="h-[450px] w-full flex justify-center ">
                 <img
@@ -171,7 +172,7 @@ const CreateAssignment = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default CreateAssignment;
+export default UpdateAssignment
