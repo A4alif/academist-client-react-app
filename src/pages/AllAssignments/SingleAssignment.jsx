@@ -11,7 +11,7 @@ const SingleAssignment = ({ assignment }) => {
     dueDate,
     difficultyLevel,
   } = assignment;
-  console.log(assignment);
+  
 
   return (
     <>
@@ -21,7 +21,7 @@ const SingleAssignment = ({ assignment }) => {
             <figure className="py-6 ">
               <img
                 className="h-[350px] w-[450px] object-cover  "
-                src="https://i.postimg.cc/wBGSRGmD/courses-1.jpg"
+                src={thumbnail}
                 alt="Shoes"
               />
             </figure>
@@ -45,7 +45,7 @@ const SingleAssignment = ({ assignment }) => {
             </div>
             <div className="flex justify-around mt-4">
               <div>
-                <Link>
+                <Link to={`/assignmentdetails/${_id}`} >
                   {" "}
                   <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     See Details
