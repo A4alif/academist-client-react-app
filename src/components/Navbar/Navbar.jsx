@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/Logo-dark.png";
+import { AuthContext } from "../../Provider/AuthProvider";
+import avatar from "../../assets/images/avatar-image.png";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast("Logged Out");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <div className="container mx-auto px-6">
@@ -123,7 +136,11 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://i.postimg.cc/445YCvkp/a4alif.jpg" />
+                  {user?.photoURL ? (
+                    <img src={user?.photoURL} alt="" />
+                  ) : (
+                    <img src={avatar} alt="" />
+                  )}
                 </div>
               </label>
               <ul
@@ -131,7 +148,7 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
               >
                 <li className="py-3">
-                  <a className="justify-between">Alif Hasan Shah</a>
+                  <a className="justify-between">{user?.displayName}</a>
                 </li>
                 <li>
                   <a>My Assignment</a>
@@ -139,14 +156,30 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="ml-6">
-              <Link to={"/login"}>
-                <button
-                  type="button"
-                  className="text-white  bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
-                >
-                  Login
-                </button>
-              </Link>
+              {user?.email ? (
+                <>
+                  {" "}
+                  <button
+                    onClick={handleLogOut}
+                    type="button"
+                    className="text-white  bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+                  >
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Link to={"/login"}>
+                    <button
+                      type="button"
+                      className="text-white  bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

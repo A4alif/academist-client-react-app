@@ -11,7 +11,7 @@ const Faq = () => {
           <div className="flex flex-col lg:flex-row items-center space-x-6 space-y-7 md:space-y-0 mt-14 lg:mt-0">
             <div className="flex-1">
               <div className="collapse collapse-plus bg-base-200 border border-b-2 border-b-green-400">
-                <input type="radio" name="my-accordion-3" checked="checked" />
+                <input type="radio" name="my-accordion-3" defaultChecked="checked" />
                 <div className="collapse-title text-xl font-medium">
                   <h2 className="text-xl font-semibold">
                     How do I submit my assignment on Academist?
