@@ -5,7 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import avatar from "../../assets/images/avatar-image.png";
 import { toast } from "react-toastify";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-import logoDark from '../../assets/images/logo.png'
+import logoDark from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(
@@ -107,25 +107,38 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                {user?.email ? <><NavLink
-                to="/submitted-assignments"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "pending"
-                    : isActive
-                    ? "text-green-600 font-semibold  "
-                    : ""
-                }
-              >
-                Submitted Assignments
-              </NavLink></>: ''}
+                  {user?.email ? (
+                    <>
+                      <NavLink
+                        to="/submitted-assignments"
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? "pending"
+                            : isActive
+                            ? "text-green-600 font-semibold  "
+                            : ""
+                        }
+                      >
+                        Submitted Assignments
+                      </NavLink>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </li>
               </ul>
             </div>
             <div className="flex items-center space-x-4">
               <div className="w-40">
-                {theme === 'light'? <img className=" md:block" src={logo} alt="" />: <img className=" md:block" src={logoDark} alt="" />}
-                
+                {theme === "light" ? (
+                  <Link to={"/"}>
+                    <img className=" md:block" src={logo} alt="" />
+                  </Link>
+                ) : (
+                  <Link to={"/"}>
+                    <img className=" md:block" src={logoDark} alt="" />
+                  </Link>
+                )}
               </div>
               {/* dark mode button */}
 
@@ -191,18 +204,24 @@ const Navbar = () => {
               >
                 All Assignments
               </NavLink>
-              {user?.email ? <><NavLink
-                to="/submitted-assignments"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "pending"
-                    : isActive
-                    ? "text-green-600 font-semibold  "
-                    : ""
-                }
-              >
-                Submitted Assignments
-              </NavLink></>: ''}
+              {user?.email ? (
+                <>
+                  <NavLink
+                    to="/submitted-assignments"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "text-green-600 font-semibold  "
+                        : ""
+                    }
+                  >
+                    Submitted Assignments
+                  </NavLink>
+                </>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
           <div className="navbar-end">
@@ -224,10 +243,12 @@ const Navbar = () => {
                   <a className="justify-between">{user?.displayName}</a>
                 </li>
                 <li>
-                  <Link to={'/posted-assignments'} >Posted Assignments</Link>
+                  <Link to={"/posted-assignments"}>Posted Assignments</Link>
                 </li>
                 <li className="pb-3">
-                  <Link to={'/mysubmit-assignments'} >My Submit Assignments</Link>
+                  <Link to={"/mysubmit-assignments"}>
+                    My Submit Assignments
+                  </Link>
                 </li>
               </ul>
             </div>
