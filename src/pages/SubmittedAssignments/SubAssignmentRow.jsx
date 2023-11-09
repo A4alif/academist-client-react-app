@@ -1,5 +1,6 @@
 import React from "react";
 import { FcDownRight } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 const SubAssignmentRow = ({ assignment }) => {
   const {
@@ -45,7 +46,7 @@ const SubAssignmentRow = ({ assignment }) => {
         <td className="font-bold text-green-600">{sumitUserName}</td>
         <td>
           {" "}
-          <button className="btn btn-primary btn-sm">View Solution</button>{" "}
+         <Link to={`/view-solution/${_id}`}> <button className="btn btn-primary btn-sm">View Solution</button></Link>{" "}
         </td>
         <td>
           <span className="bg-green-200 p-2 rounded-full text-green-900">

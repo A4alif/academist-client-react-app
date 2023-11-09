@@ -12,6 +12,7 @@ import AssignmentDetails from "../pages/AssignmentDetails/AssignmentDetails";
 import PostedAssignments from "../pages/PostedAssignments/PostedAssignments";
 import SubmittedAssignments from "../pages/SubmittedAssignments/SubmittedAssignments";
 import MySubAssignment from "../pages/MySubAssignment/MySubAssignment";
+import ViewSolution from "../pages/ViewSolution/ViewSolution";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/assignmentdetails/:id",
-        element: <AssignmentDetails />,
+        element: <PrivateRoute><AssignmentDetails /></PrivateRoute>,
       },
       {
         path: "/posted-assignments",
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/mysubmit-assignments",
         element: <PrivateRoute><MySubAssignment /></PrivateRoute>
+      },
+      {
+        path: "/view-solution/:id",
+        element: <PrivateRoute> <ViewSolution /> </PrivateRoute>
       }
     ],
   },

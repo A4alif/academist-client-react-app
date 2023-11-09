@@ -84,6 +84,20 @@ const Navbar = () => {
                     All Assignments
                   </NavLink>
                 </li>
+                <li>
+                {user?.email ? <><NavLink
+                to="/submitted-assignments"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-green-600 font-semibold  "
+                    : ""
+                }
+              >
+                Submitted Assignments
+              </NavLink></>: ''}
+                </li>
               </ul>
             </div>
             <div className="flex items-center space-x-4">

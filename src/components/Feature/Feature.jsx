@@ -19,7 +19,7 @@ const Feature = () => {
       <div className="pt-24 pb-9">
         <div className="container mx-auto px-6">
           <h2 className="text-6xl font-semibold text-center text-green-600">
-            Feature Assignments
+            Featured Assignments
           </h2>
           {loading && (
             <>
