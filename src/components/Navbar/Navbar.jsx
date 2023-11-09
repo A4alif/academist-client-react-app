@@ -151,7 +151,7 @@ const Navbar = () => {
                   <a className="justify-between">{user?.displayName}</a>
                 </li>
                 <li>
-                  <a>My Assignment</a>
+                  <Link to={'/posted-assignments'} >Posted Assignments</Link>
                 </li>
               </ul>
             </div>

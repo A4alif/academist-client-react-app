@@ -4,16 +4,17 @@ import SingleAssignment from "./SingleAssignment";
 
 const AllAssignments = () => {
   const [assignments, setAssignments] = useState([]);
+  const [level, setLevel] = useState('')
   const [loading, setLoading] = useState(false);
   const axios = useAxios();
-
+console.log(level);
   useEffect(() => {
     setLoading(true);
-    axios.get("/all-assignments").then((res) => {
+    axios.get(`/all-assignments?difficultyLevel=${level}`).then((res) => {
       setAssignments(res.data);
       setLoading(false);
     });
-  }, []);
+  }, [level]);
 
   return (
     <>
@@ -33,6 +34,7 @@ const AllAssignments = () => {
                 Select Difficulty Level{" "}
               </label>
               <select
+              onChange={(e) => setLevel(e.target.value)}
                 className="w-40 py-2 bg-gray-200 rounded-md focus:outline-none"
                 name="assignmentType"
                 id="assignmentType"
