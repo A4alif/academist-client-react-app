@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-import useAxios from '../../hooks/useAxios';
-import AssignmentRow from './AssignmentRow';
-import { AuthContext } from '../../Provider/AuthProvider';
+import React, { useContext, useEffect, useState } from "react";
+import useAxios from "../../hooks/useAxios";
+import AssignmentRow from "./AssignmentRow";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 const PostedAssignments = () => {
- const [assignments, setAssignments] = useState([]);
+  const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
   const axios = useAxios();
-  const {user} = useContext(AuthContext);
-  
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
@@ -18,12 +18,24 @@ const PostedAssignments = () => {
   }, []);
 
   const handleDelete = (id) => {
-    console.log(id);
-  }
+    axios.delete(`/all-assignments/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Assignment Deleted Successfully",
+        });
+      }
+      const remaining = assignments.filter(
+        (assignment) => assignment._id !== id
+      );
+      setAssignments(remaining);
+    });
+  };
 
   return (
     <div>
-         <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center py-9">
           My Posted Assignments : {assignments?.length}
         </h2>
@@ -53,18 +65,20 @@ const PostedAssignments = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                    assignments?.map( (assignment) => (
-                        <AssignmentRow key={assignment?._id} assignment={assignment} handleDelete={handleDelete} />
-                    ))
-                }
+                {assignments?.map((assignment) => (
+                  <AssignmentRow
+                    key={assignment?._id}
+                    assignment={assignment}
+                    handleDelete={handleDelete}
+                  />
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostedAssignments
+export default PostedAssignments;
