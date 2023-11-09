@@ -8,7 +8,7 @@ const Faq = () => {
           <h2 className="text-7xl font-semibold text-center text-green-600">
             FAQ
           </h2>
-          <div className="flex flex-col lg:flex-row items-center space-x-6 space-y-7 md:space-y-0 mt-14 lg:mt-0">
+          <div className="flex flex-col lg:flex-row items-center space-x-6 space-y-7 md:space-y-0 mt-14 lg:mt-0 py-14">
             <div className="flex-1">
               <div className="collapse collapse-plus bg-base-200 border border-b-2 border-b-green-400">
                 <input type="radio" name="my-accordion-3" defaultChecked="checked" />
@@ -82,7 +82,7 @@ const Faq = () => {
               </div>
             </div>
             <div className="flex-1">
-              <div>
+              <div className="mt-14">
                 <img
                   className="h-[500px] w-full object-cover"
                   src="https://i.postimg.cc/3wdXNS7M/FAQ.webp"

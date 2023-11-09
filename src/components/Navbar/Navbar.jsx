@@ -1,11 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/Logo-dark.png";
 import { AuthContext } from "../../Provider/AuthProvider";
 import avatar from "../../assets/images/avatar-image.png";
 import { toast } from "react-toastify";
+import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
+import logoDark from '../../assets/images/logo.png'
 
 const Navbar = () => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
+
+  // update state on toggle
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
+  // set theme state in localstorage on mount & also update localstorage on state change
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -102,8 +124,33 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-4">
               <div className="w-40">
-                <img className=" md:block" src={logo} alt="" />
+                {theme === 'light'? <img className=" md:block" src={logo} alt="" />: <img className=" md:block" src={logoDark} alt="" />}
+                
               </div>
+              {/* dark mode button */}
+
+              <div>
+                <div className="flex-none">
+                  {/* Toggle button here */}
+                  <button className="btn btn-square btn-ghost">
+                    <label className="swap swap-rotate w-12 h-12">
+                      <input
+                        type="checkbox"
+                        onChange={handleToggle}
+                        // show toggle image based on localstorage theme
+                        checked={theme === "light" ? false : true}
+                      />
+                      {/* show sun or moon icon */}
+                      {theme === "light" ? (
+                        <BsFillSunFill size={20} />
+                      ) : (
+                        <BsFillMoonStarsFill size={20} />
+                      )}
+                    </label>
+                  </button>
+                </div>
+              </div>
+              {/* dark mode button end */}
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">
