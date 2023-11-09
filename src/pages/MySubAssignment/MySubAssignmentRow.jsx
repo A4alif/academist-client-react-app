@@ -1,7 +1,6 @@
 import React from "react";
 import { FcDownRight } from "react-icons/fc";
-
-const SubAssignmentRow = ({ assignment }) => {
+const MySubAssignmentRow = ({ assignment }) => {
   const {
     _id,
     author,
@@ -41,7 +40,7 @@ const SubAssignmentRow = ({ assignment }) => {
             </div>
           </div>
         </td>
-        <td className="font-bold">{author}</td>
+
         <td className="font-bold text-green-600">{sumitUserName}</td>
         <td>
           {" "}
@@ -61,4 +60,4 @@ const SubAssignmentRow = ({ assignment }) => {
   );
 };
 
-export default SubAssignmentRow;
+export default MySubAssignmentRow;

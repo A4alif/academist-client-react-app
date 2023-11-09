@@ -165,9 +165,9 @@ const Navbar = () => {
                 <li>
                   <Link to={'/posted-assignments'} >Posted Assignments</Link>
                 </li>
-                {/* <li className="pb-3">
-                  <Link to={'/submitted-assignments'} >My Submit Assignments</Link>
-                </li> */}
+                <li className="pb-3">
+                  <Link to={'/mysubmit-assignments'} >My Submit Assignments</Link>
+                </li>
               </ul>
             </div>
             <div className="ml-6">
