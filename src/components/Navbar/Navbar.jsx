@@ -93,7 +93,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 text-xl font-normal space-x-8">
+            <ul className="menu menu-horizontal px-1 text-lg font-normal space-x-8">
               <NavLink
                 to="/"
                 className={({ isActive, isPending }) =>
@@ -130,6 +130,18 @@ const Navbar = () => {
               >
                 All Assignments
               </NavLink>
+              {user?.email ? <><NavLink
+                to="/submitted-assignments"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-green-600 font-semibold  "
+                    : ""
+                }
+              >
+                Submitted Assignments
+              </NavLink></>: ''}
             </ul>
           </div>
           <div className="navbar-end">
@@ -153,6 +165,9 @@ const Navbar = () => {
                 <li>
                   <Link to={'/posted-assignments'} >Posted Assignments</Link>
                 </li>
+                {/* <li className="pb-3">
+                  <Link to={'/submitted-assignments'} >My Submit Assignments</Link>
+                </li> */}
               </ul>
             </div>
             <div className="ml-6">

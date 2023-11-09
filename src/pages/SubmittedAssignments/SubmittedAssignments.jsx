@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import useAxios from "../../hooks/useAxios";
-import AssignmentRow from "./AssignmentRow";
+import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from "../../Provider/AuthProvider";
-import Swal from "sweetalert2";
-const PostedAssignments = () => {
+import useAxios from '../../hooks/useAxios';
+import SubAssignmentRow from './SubAssignmentRow';
+const SubmittedAssignments = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
   const axios = useAxios();
@@ -11,33 +10,20 @@ const PostedAssignments = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`/all-assignments?email=${user?.email}`).then((res) => {
+    axios.get("/submit-assignments").then((res) => {
       setAssignments(res.data);
       setLoading(false);
     });
   }, []);
 
-  const handleDelete = (id) => {
-    axios.delete(`/all-assignments/${id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Assignment Deleted Successfully",
-        });
-      }
-      const remaining = assignments.filter(
-        (assignment) => assignment._id !== id
-      );
-      setAssignments(remaining);
-    });
-  };
+
 
   return (
-    <div className="py-24">
+    <>
+      <div className='py-24'>
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center py-9">
-          My Posted Assignments : {assignments?.length}
+          All Submitted Assignments : {assignments?.length}
         </h2>
         {loading && (
           <>
@@ -58,18 +44,20 @@ const PostedAssignments = () => {
                     </label>
                   </th>
                   <th>Assignments</th>
-                  <th>Due Date</th>
+                  <th>Created By</th>
+                  <th>Submit By</th>
+                  <th>View Solution</th>
+                  <th>Status</th>
                   <th>Marks</th>
-                  <th>Difficulty Level</th>
-                  <th>Posted By</th>
                 </tr>
               </thead>
               <tbody>
                 {assignments?.map((assignment) => (
-                  <AssignmentRow
+                  
+                  <SubAssignmentRow
                     key={assignment?._id}
                     assignment={assignment}
-                    handleDelete={handleDelete}
+                    
                   />
                 ))}
               </tbody>
@@ -78,7 +66,8 @@ const PostedAssignments = () => {
         </div>
       </div>
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default PostedAssignments;
+export default SubmittedAssignments
