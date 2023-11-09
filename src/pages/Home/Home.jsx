@@ -2,6 +2,7 @@ import React from "react";
 import Banner from "../../components/Banner/Banner";
 import MarqueImage from "../../components/MarqueImage/MarqueImage";
 import Faq from "../../components/Faq/Faq";
+import Feature from "../../components/Feature/Feature";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
         }}
       >
         <MarqueImage />
+      </div>
+      <div>
+        <Feature />
       </div>
       <div>
         <Faq />

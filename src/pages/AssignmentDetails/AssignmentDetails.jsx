@@ -9,8 +9,10 @@ const AssignmentDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     axios.get(`/all-assignments/${id}`).then((res) => {
       setAssignment(res.data);
+      setLoading(false)
     });
   }, []);
   const {title, author, description, difficultyLevel, dueDate, marks, thumbnail} = assignment || {}

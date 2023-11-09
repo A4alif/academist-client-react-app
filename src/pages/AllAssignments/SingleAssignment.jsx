@@ -21,7 +21,7 @@ const SingleAssignment = ({ assignment }) => {
               <img
                 className="h-[350px] w-[450px] object-cover  "
                 src={thumbnail}
-                alt="Shoes"
+                alt="pic"
               />
             </figure>
           </div>
