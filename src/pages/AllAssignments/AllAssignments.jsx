@@ -3,16 +3,17 @@ import useAxios from "../../hooks/useAxios";
 import SingleAssignment from "./SingleAssignment";
 
 const AllAssignments = () => {
-  const [assignments, setAssignments] = useState([])
+  const [assignments, setAssignments] = useState([]);
+  const [loading, setLoading] = useState(false);
   const axios = useAxios();
 
-
-  useEffect( () => {
-    axios.get('/all-assignments')
-    .then(res => {
+  useEffect(() => {
+    setLoading(true);
+    axios.get("/all-assignments").then((res) => {
       setAssignments(res.data);
-    })
-  }, [])
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
@@ -44,13 +45,19 @@ const AllAssignments = () => {
               </select>
             </div>
           </div>
+          
+          {loading && (
+            <>
+              <div className="text-center py-14 text-green-700" >
+              <span className="loading loading-bars loading-lg"></span>
+              </div>
+            </>
+          )}
           {/* show all assignments */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-14 pb-9">
-            {
-              assignments?.map( (assignment) => (
-                <SingleAssignment key={assignment?._id} assignment={assignment} />
-              ))
-            }
+            {assignments?.map((assignment) => (
+              <SingleAssignment key={assignment?._id} assignment={assignment} />
+            ))}
           </div>
         </div>
       </div>

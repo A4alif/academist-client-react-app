@@ -24,6 +24,7 @@ const CreateAssignment = () => {
       description,
       dueDate,
       difficultyLevel,
+      author: user?.displayName,
       email: user?.email,
     };
 
