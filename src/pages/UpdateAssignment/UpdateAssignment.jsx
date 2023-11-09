@@ -1,9 +1,31 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../../Provider/AuthProvider';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useParams } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
 const UpdateAssignment = () => {
-  const {user} = useContext(AuthContext);
+  const [assignment, setAssignment] = useState({});
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
+  const axios = useAxios();
 
-  const handleSubmitAssignment = (e) => {
+  useEffect(() => {
+    axios.get(`/all-assignments/${id}`).then((res) => {
+      setAssignment(res.data);
+    });
+  }, []);
+
+  const {
+    title,
+    author,
+    description,
+    difficultyLevel,
+    dueDate,
+    marks,
+    thumbnail,
+  } = assignment || {};
+
+  const handleUpdateAssignment = (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
@@ -13,7 +35,6 @@ const UpdateAssignment = () => {
     const dueDate = form.dueDate.value;
     const difficultyLevel = form.assignmentType.value;
 
-    
     const assignmentInfo = {
       title,
       thumbnail,
@@ -21,14 +42,34 @@ const UpdateAssignment = () => {
       description,
       dueDate,
       difficultyLevel,
-      email: user?.email
-    }
-    console.log(assignmentInfo);
+      author: user?.displayName,
+      email: user?.email,
+    };
 
-  }
+    axios.put(`/update-assignment/${id}`, assignmentInfo)
+    .then( res => {
+      if(res.data.modifiedCount > 0){
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Assignment Updated Successfully",
+          
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops",
+          text: "Something Went Wrong",
+          
+        });
+      }
+    })
+
+
+  };
   return (
     <>
-        <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-6 py-24">
         <div className="flex flex-col lg:flex-row  items-center lg:items-start space-y-8 lg:space-y-0">
           <div className=" w-full lg:flex-1  ">
             <div>
@@ -45,7 +86,7 @@ const UpdateAssignment = () => {
             </div>
           </div>
           <div className=" w-full lg:flex-1 bg-base-200 shadow-lg">
-            <form onSubmit={handleSubmitAssignment}>
+            <form onSubmit={handleUpdateAssignment}>
               <div className="flex justify-center pt-6">
                 <div className=" w-3/4  lg:w-3/4 ">
                   <label
@@ -55,6 +96,7 @@ const UpdateAssignment = () => {
                     Assignment Title
                   </label>
                   <input
+                    defaultValue={title}
                     name="title"
                     id="title"
                     className="py-2 px-2 rounded-lg focus:outline-none w-full"
@@ -73,6 +115,7 @@ const UpdateAssignment = () => {
                     Thumbnail
                   </label>
                   <input
+                    defaultValue={thumbnail}
                     name="photourl"
                     id="photourl"
                     className="py-2 px-2 rounded-lg focus:outline-none w-full"
@@ -91,6 +134,7 @@ const UpdateAssignment = () => {
                     Marks
                   </label>
                   <input
+                    defaultValue={marks}
                     name="marks"
                     id="marks"
                     className="py-2 px-2 rounded-lg focus:outline-none w-full"
@@ -109,6 +153,7 @@ const UpdateAssignment = () => {
                     Description
                   </label>
                   <textarea
+                    defaultValue={description}
                     name="description"
                     id="description"
                     cols="10"
@@ -128,6 +173,7 @@ const UpdateAssignment = () => {
                     Due Date
                   </label>
                   <input
+                    defaultValue={dueDate}
                     name="dueDate"
                     id="dueDate"
                     className="py-2 px-2 rounded-lg focus:outline-none w-full text-gray-400"
@@ -163,7 +209,7 @@ const UpdateAssignment = () => {
                     type="submit"
                     className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   >
-                    Submit Assignment
+                    Update Assignment
                   </button>
                 </div>
               </div>
@@ -172,7 +218,7 @@ const UpdateAssignment = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default UpdateAssignment
+export default UpdateAssignment;
